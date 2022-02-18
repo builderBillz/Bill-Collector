@@ -1,25 +1,48 @@
-import logo from './logo.svg';
 import './App.css';
+import Buttons from './Components/buttons';
+import Display from './Components/display';
+import React from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor(){
+    super()
+    this.state = {
+      displayedNumber: "0",
+      operation: ""
+    } 
+  }
+
+
+  daddyButtons = (event) =>{
+    if(this.state.displayedNumber === '0'){
+
+      this.setState({
+        displayedNumber:event.target.innerText
+      })
+    
+    }else{
+
+      let updateDisplay = this.state.displayedNumber ;
+      updateDisplay += event.target.innerText;
+      this.setState({
+        displayedNumber:updateDisplay
+      })
+
+    }
+    
+    
+    console.log(event.target.innerText)
+  }
+
+  render(){
+
+    return (
+      <div className="App">
+        <Display displayedNumber= {this.state.displayedNumber} />
+        <Buttons daddyButtons= {this.daddyButtons}/>
+      </div>
+    );
+  }
 }
 
 export default App;
